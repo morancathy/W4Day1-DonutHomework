@@ -24,7 +24,6 @@ class Hero {
     console.log(`I\'m ready to rumble!`);
     const fightQuoteEl = document.querySelector('#fight-quote');
     fightQuoteEl.textContent = "I'm ready to rumble!";
-
   }
 
 };
