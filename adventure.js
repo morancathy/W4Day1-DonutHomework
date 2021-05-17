@@ -27,8 +27,32 @@ class Hero {
   }
 
 };
-
 const Dougie = new Hero("Dougie");
 Dougie.talkSass();
+Dougie.annouceHealth();
 Dougie.fight();
-console.log("word up");
+
+class Enemy {
+  constructor(name){
+    this.name = name;
+    this.health = 100;
+    this.weapons = {
+      pepperoniStars: 5,
+      cheeseGrease: 10
+    }
+    this.catchPhrases = ['i\'m youtube famous', 'i\'m more dangerous than an uncovered sewer'];
+  };
+  talkSmack(){
+      console.log(`"${this.catchPhrases[Math.floor(Math.random() * this.catchPhrases.length)]}"`);
+  }
+  annouceHealth(){
+    console.log(this.health);
+  }
+  fight(){
+    console.log("I\'m gonna flatten you like a slice of pepperoni!");
+  }
+}
+const PizzaRat = new Enemy("Pizza Rat");
+PizzaRat.talkSmack();
+PizzaRat.annouceHealth();
+PizzaRat.fight();
