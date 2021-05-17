@@ -8,29 +8,30 @@ class Hero {
       sprinkleSpray: 5,
       sugarShock: 10
     }
-    this.catchPhrases = ['i\'m fresher than day old pizza','you can\'t count my calories'];
+    this.catchPhrases = ['I\'m fresher than day old pizza','You can\'t count my calories'];
   };
 
   talkSass(){
     const quoteEl = document.querySelector('#random-quote');
-    quoteEl.textContent = `"${this.catchPhrases[Math.floor(Math.random() * this.catchPhrases.length)]}"`
+    quoteEl.textContent = `Dougie: ${this.catchPhrases[Math.floor(Math.random() * this.catchPhrases.length)]}`
+    console.log(`Dougie: ${this.catchPhrases[Math.floor(Math.random() * this.catchPhrases.length)]}`);
   };
 
   annouceHealth(){
-    console.log(this.health);
+    console.log(`Dougie's Health: ${this.health}`);
   }
 
-  fight(){
-    console.log(`I\'m ready to rumble!`);
+  fight(opponent){
+    console.log(`Dougie: I\'m ready to rumble!`);
     const fightQuoteEl = document.querySelector('#fight-quote');
-    fightQuoteEl.textContent = "I'm ready to rumble!";
-  }
+    fightQuoteEl.textContent = "Dougie: I'm ready to rumble!";
 
+    opponent.health -= this.weapons.sprinkleSpray;
+    console.log(`Pizza Rat was hit with sprinkle spray! His health is now ${opponent.health}.`);
+    // console.log(`sugar shock hitpoints: ${this.weapons.sugarShock}`);
+  }
 };
 const Dougie = new Hero("Dougie");
-Dougie.talkSass();
-Dougie.annouceHealth();
-Dougie.fight();
 
 class Enemy {
   constructor(name){
@@ -40,19 +41,36 @@ class Enemy {
       pepperoniStars: 5,
       cheeseGrease: 10
     }
-    this.catchPhrases = ['i\'m youtube famous', 'i\'m more dangerous than an uncovered sewer'];
+    this.catchPhrases = ['I\'m youtube famous', 'I\'m more dangerous than an uncovered sewer'];
   };
+
   talkSmack(){
-      console.log(`"${this.catchPhrases[Math.floor(Math.random() * this.catchPhrases.length)]}"`);
+      console.log(`Pizza Rat: ${this.catchPhrases[Math.floor(Math.random() * this.catchPhrases.length)]}`);
   }
+
   annouceHealth(){
-    console.log(this.health);
+    console.log(`Pizza Rat's health: ${this.health}`);
   }
-  fight(){
-    console.log("I\'m gonna flatten you like a slice of pepperoni!");
+
+  fight(opponent){
+    console.log("Pizza Rat: I\'m gonna flatten you like a slice of pepperoni!");
+    opponent.health -= this.weapons.pepperoniStars;
+    console.log(`Dougie got hit with pepperoni stars! His health is now ${opponent.health}.`);
+    // console.log(`cheese grease hitpoints: ${this.weapons.cheeseGrease}`);
+    // console.log(Object.keys[1][this.weapons]);
   }
 }
 const PizzaRat = new Enemy("Pizza Rat");
-PizzaRat.talkSmack();
+
+function walkingDownTheStreet(){
+  Dougie.talkSass();
+  PizzaRat.talkSmack();
+  Dougie.annouceHealth();
+  PizzaRat.annouceHealth();
+}
+walkingDownTheStreet();
+
+PizzaRat.fight(Dougie);
+Dougie.fight(PizzaRat);
 PizzaRat.annouceHealth();
-PizzaRat.fight();
+Dougie.annouceHealth();
