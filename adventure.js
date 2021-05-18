@@ -12,23 +12,46 @@ class Hero {
   };
 
   talkSass(){
-    const quoteEl = document.querySelector('#random-quote');
+    const quoteEl = document.querySelector('#hero-quotes');
     quoteEl.textContent = `Dougie: ${this.catchPhrases[Math.floor(Math.random() * this.catchPhrases.length)]}`
-    console.log(`Dougie: ${this.catchPhrases[Math.floor(Math.random() * this.catchPhrases.length)]}`);
   };
 
   annouceHealth(){
     console.log(`Dougie's Health: ${this.health}`);
+    document.querySelector(".dougie-health").innerText = `Dougie's Health: ${this.health}`;
   }
 
   fight(opponent){
-    console.log(`Dougie: I\'m ready to rumble!`);
-    const fightQuoteEl = document.querySelector('#fight-quote');
+    const fightQuoteEl = document.querySelector('#hero-fight-quote');
     fightQuoteEl.textContent = "Dougie: I'm ready to rumble!";
 
-    opponent.health -= this.weapons.sprinkleSpray;
-    console.log(`Pizza Rat was hit with sprinkle spray! His health is now ${opponent.health}.`);
-    // console.log(`sugar shock hitpoints: ${this.weapons.sugarShock}`);
+    function sprinkleSpray(){
+      document.getElementById('sprinkle-spray').addEventListener('click', attack);
+      function attack(){
+        opponent.health -= 5;  //-= this.weapons.sprinkleSpray;  wouldn't work. Why?
+        if(opponent.health <= 0){
+          endGame();
+        } else{
+          opponent.annouceHealth();
+          alert(`Pizza Rat was hit with sprinkle spray!`)
+        }
+      }
+    }
+    sprinkleSpray();
+
+    function sugarShock(){
+      document.getElementById('sugar-shock').addEventListener('click', attack);
+      function attack(){
+        opponent.health -= 10;  //-= this.weapons.sugarShock;  wouldn't work. Why?
+        if(opponent.health <= 0){
+          endGame();
+        } else{
+          opponent.annouceHealth();
+          alert(`Pizza Rat was hit with Sugar Shock!`)
+        }
+      }
+    }
+    sugarShock();
   }
 };
 const Dougie = new Hero("Dougie");
@@ -45,32 +68,63 @@ class Enemy {
   };
 
   talkSmack(){
-      console.log(`Pizza Rat: ${this.catchPhrases[Math.floor(Math.random() * this.catchPhrases.length)]}`);
+      const quoteEl = document.querySelector('#enemy-quotes');
+      quoteEl.textContent = `Pizza Rat: ${this.catchPhrases[Math.floor(Math.random() * this.catchPhrases.length)]}`
   }
 
   annouceHealth(){
     console.log(`Pizza Rat's health: ${this.health}`);
+    document.querySelector(".pizza-rat-health").innerText = `Pizza Rat's Health: ${this.health}`;
   }
 
   fight(opponent){
-    console.log("Pizza Rat: I\'m gonna flatten you like a slice of pepperoni!");
-    opponent.health -= this.weapons.pepperoniStars;
-    console.log(`Dougie got hit with pepperoni stars! His health is now ${opponent.health}.`);
-    // console.log(`cheese grease hitpoints: ${this.weapons.cheeseGrease}`);
-    // console.log(Object.keys[1][this.weapons]);
+    const fightQuoteEl = document.querySelector('#enemy-fight-quote');
+    fightQuoteEl.textContent = "Pizza Rat: I'm gonna flatten you like a slice of pepperoni!";
+
+    function pepperoniStars(){
+      document.getElementById('pepperoni-stars').addEventListener('click', attack);
+      function attack(){
+        opponent.health -= 5;  //-= this.weapons.pepperoniStars;  wouldn't work. Why?
+        if(opponent.health <= 0){
+          endGame();
+        } else{
+          opponent.annouceHealth();
+          alert(`Dougie got hit with pepperoni stars!`);
+        }
+      }
+    }
+    pepperoniStars();
+
+    function cheeseGrease(){
+      document.getElementById('cheese-grease').addEventListener('click', attack);
+      function attack(){
+        opponent.health -= 10; //-= this.weapons.cheeseGrease;  wouldn't work. Why?
+        if(opponent.health <= 0){
+          endGame();
+        } else{
+          opponent.annouceHealth();
+          alert(`Dougie got hit with cheese grease!`)
+        }
+      }
+    }
+    cheeseGrease();
   }
 }
 const PizzaRat = new Enemy("Pizza Rat");
 
-function walkingDownTheStreet(){
-  Dougie.talkSass();
-  PizzaRat.talkSmack();
-  Dougie.annouceHealth();
-  PizzaRat.annouceHealth();
-}
-walkingDownTheStreet();
+function endGame(){
+  if(Dougie.health <= 0){
+    alert("Oh no, Dougie died! Game over.")
+  } else if(PizzaRat.health <= 0){
+    alert("Yay! Dougie killed Pizza Rat! Game over.");
+  }
+};
+
+Dougie.talkSass();
+PizzaRat.talkSmack();
 
 PizzaRat.fight(Dougie);
 Dougie.fight(PizzaRat);
+
 PizzaRat.annouceHealth();
 Dougie.annouceHealth();
