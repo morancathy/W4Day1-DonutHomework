@@ -28,7 +28,7 @@ class Hero {
     function sprinkleSpray(){
       document.getElementById('sprinkle-spray').addEventListener('click', attack);
       function attack(){
-        opponent.health -= 5;  //-= this.weapons.sprinkleSpray;  wouldn't work. Why?
+        opponent.health -= Dougie.weapons.sprinkleSpray; 
         if(opponent.health <= 0){
           endGame();
         } else{
@@ -42,7 +42,7 @@ class Hero {
     function sugarShock(){
       document.getElementById('sugar-shock').addEventListener('click', attack);
       function attack(){
-        opponent.health -= 10;  //-= this.weapons.sugarShock;  wouldn't work. Why?
+        opponent.health -= Dougie.weapons.sugarShock;
         if(opponent.health <= 0){
           endGame();
         } else{
@@ -84,7 +84,7 @@ class Enemy {
     function pepperoniStars(){
       document.getElementById('pepperoni-stars').addEventListener('click', attack);
       function attack(){
-        opponent.health -= 5;  //-= this.weapons.pepperoniStars;  wouldn't work. Why?
+        opponent.health -= PizzaRat.weapons.pepperoniStars;
         if(opponent.health <= 0){
           endGame();
         } else{
@@ -98,7 +98,7 @@ class Enemy {
     function cheeseGrease(){
       document.getElementById('cheese-grease').addEventListener('click', attack);
       function attack(){
-        opponent.health -= 10; //-= this.weapons.cheeseGrease;  wouldn't work. Why?
+        opponent.health -= PizzaRat.weapons.cheeseGrease;
         if(opponent.health <= 0){
           endGame();
         } else{
